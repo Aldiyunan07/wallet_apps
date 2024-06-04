@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'virtual_account_screen.dart';
 
 class TopUpScreen extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
     PaymentMethod('Dana', 'E-wallet',
         'https://play-lh.googleusercontent.com/v0UW49SrkxIzfRRhYArIJvP456-QeKT9-1Yxk19gwJESPidGAnJS7n7_sHZe81NpX_E=s96-rw'),
     PaymentMethod('GoPay', 'E-wallet',
-        'https://play-lh.googleusercontent.com/-gl80k-nLhRwy_ovgo6o3ro2QX76sAJPpz7-azG-MXeLMaUSYtmZDT3GTM10wKqGMJSZ=w480-h960-rw'),
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAPFBMVEVHcEwArtYArtYArtYArtYArtYArtYArtYArtYArtYArtb///8AqtR1x+Kh1+o7ttq23+6T0efh8fjN6PNg9HGQAAAACnRSTlMA28C9FYNc6DsuveUkRAAAAM1JREFUKJGFkwkOhCAMRVFBpOx6/7sOtIALhPmJMeSltP0tjFUpsUoAuQrFvtoTqJL7C/EFXlr4zQ7odExYo5xOpqhSuhnzGW9dSIq25cU6kQXd5AvNNecejL2ZPsvNMvWOgafWwVbVtIoJhCngck2esGAr/vVbFLxhSvAfqA0lhSGkigcwt+Upsr/WXA32Bbn0ARXUWukLErcJT5FJamBfUjRkXzE+PtllqvFlZGAjzsxFS+4to2FX2/n/NZkv2Hw150tNz2HLz2F7PIcfp5YaQ5oif+sAAAAASUVORK5CYII='),
   ];
 
   @override
@@ -65,7 +66,16 @@ class _TopUpScreenState extends State<TopUpScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Add your confirm action here
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VirtualAccountScreen(
+                        bankName: paymentMethods[_selectedPaymentMethod].name,
+                        virtualAccountNumber:
+                            '7000108*54534523', // Example virtual account number
+                      ),
+                    ),
+                  );
                 },
                 child: Text('Konfirmasi'),
                 style: ElevatedButton.styleFrom(

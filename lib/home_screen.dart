@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final String profileImageUrl =
       'https://pbs.twimg.com/profile_images/1678047241037070337/Q2r5XAW__400x400.jpg';
   final String userName = 'FullName Example';
@@ -14,6 +19,8 @@ class HomeScreen extends StatelessWidget {
     Transaction('Ida Nia', -30000, DateTime(2021, 7, 1)),
     Transaction('Mahnu', 10000, DateTime(2021, 7, 1)),
   ];
+
+  bool _isBalanceVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +60,9 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Rp. ${totalBalance.toStringAsFixed(0)}',
+                          _isBalanceVisible
+                              ? 'Rp. ${totalBalance.toStringAsFixed(0)}'
+                              : 'Rp. •••••••',
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
@@ -61,7 +70,19 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(width: 4.0),
-                        Icon(Icons.visibility, color: Colors.grey[600])
+                        IconButton(
+                          icon: Icon(
+                            _isBalanceVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey[600],
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isBalanceVisible = !_isBalanceVisible;
+                            });
+                          },
+                        ),
                       ],
                     ),
                   ],
