@@ -72,7 +72,7 @@ class _HistoryPageState extends State<HistoryPage> {
               Color(0xFF623AA2), // Purple color
               Colors.white,
             ],
-            stops: [0.30, 0.30],
+            stops: [0.35, 0.35],
           ),
         ),
         child: Padding(
@@ -118,7 +118,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                   Expanded(
                                     child: Padding(
                                       padding: EdgeInsets.only(top: 8.0),
-                                      child: Text('Rp.'
+                                      child: Text('Rp '
                                         '${transaction['formatted']}',
                                         textAlign: TextAlign.right,
                                         style: TextStyle(

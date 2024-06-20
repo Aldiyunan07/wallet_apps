@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:percobaan/pages/auth/login.dart';
 import 'package:percobaan/pages/history_page.dart';
 import 'package:percobaan/pages/profile_page.dart';
+import 'package:percobaan/pages/topup/chose_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -200,16 +201,19 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              _buildButton(Icons.add, 'Top Up', () {
-                                // Aksi ketika tombol Top Up ditekan
-                              },
+                              _buildButton(Icons.add, 'Top Up', () {},
                                   size: 24.0,
                                   padding: EdgeInsets.only(left: 12.0)),
                               _buildButton(Icons.money_off, 'Withdraw', () {
                                 // Aksi ketika tombol Withdraw ditekan
                               }, size: 24.0),
                               _buildButton(Icons.swap_horiz, 'Transfer', () {
-                                // Aksi ketika tombol Transfer ditekan
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChosePage(),
+                                  ),
+                                );
                               },
                                   size: 24.0,
                                   padding: EdgeInsets.only(right: 12.0)),
