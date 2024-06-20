@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:percobaan/pages/auth/login.dart';
 import 'package:percobaan/pages/history_page.dart';
 import 'package:percobaan/pages/profile_page.dart';
 import 'package:percobaan/pages/transfer/chose_page.dart';
@@ -14,11 +13,51 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Future<Map<String, dynamic>> _userProfile;
+  List<Map<String, dynamic>> transferHistory = [];
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
     _userProfile = _fetchUserProfile();
+    fetchTransferHistory();
+  }
+
+  Future<void> fetchTransferHistory() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final url = Uri.parse('http://10.0.2.2:8000/api/transfer/history');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        if (responseData['data'] != null) {
+          setState(() {
+            transferHistory =
+                List<Map<String, dynamic>>.from(responseData['data']);
+            isLoading = false;
+          });
+        }
+      } else {
+        print(
+            'Failed to load transaction history. Error: ${response.statusCode}');
+        isLoading = false;
+      }
+    } catch (error) {
+      print('Error loading transaction history: $error');
+      isLoading = false;
+    }
   }
 
   Future<Map<String, dynamic>> _fetchUserProfile() async {
@@ -222,8 +261,76 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 16.0),
-                    Spacer(),
+                    SizedBox(height: 20.0),
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        'Histori transfer',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.grey[500],
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    isLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : Expanded(
+                            child: ListView.builder(
+                              itemCount: transferHistory.length,
+                              itemBuilder: (context, index) {
+                                final transfer = transferHistory[index];
+                                return Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(15.0),
+                                    child: Row(
+                                      children: <Widget>[
+                                        CircleAvatar(
+                                          radius: 20,
+                                          backgroundImage: NetworkImage(
+                                              'https://via.placeholder.com/40'),
+                                        ),
+                                        SizedBox(width: 16.0),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Text(
+                                                '${transfer['receiver']['name']}',
+                                                style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                '${transfer['date']}',
+                                                style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Text(
+                                          'Rp. ${transfer['formatted']}',
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                   ],
                 );
               } else {
