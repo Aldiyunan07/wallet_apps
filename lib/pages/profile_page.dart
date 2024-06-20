@@ -33,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     try {
-      final apiUrl = 'https://walletjwtapi.000webhostapp.com/api/me';
+      final apiUrl = 'http://10.0.2.2:8000/api/me';
 
       final response = await http.get(
         Uri.parse(apiUrl),
@@ -58,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     try {
-      final apiUrl = 'https://walletjwtapi.000webhostapp.com/api/logout';
+      final apiUrl = 'http://10.0.2.2:8000/api/logout';
 
       final response = await http.post(
         Uri.parse(apiUrl),

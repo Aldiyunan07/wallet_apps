@@ -29,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
       String pinConfirmation = _pinConfirmationController.text.trim();
 
       // API endpoint
-      String apiUrl = 'https://walletjwtapi.000webhostapp.com/api/register';
+      String apiUrl = 'http://10.0.2.2:8000/api/register';
 
       try {
         // Send POST request with registration data

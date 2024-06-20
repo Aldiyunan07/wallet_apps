@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percobaan/home.dart';
+import 'package:percobaan/pages/transfer/transfer_page.dart';
 import 'pages/auth/login.dart';
 import 'pages/auth/register.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterPage(),
         '/home': (context) => HomePage(),
         '/login': (context) => LoginPage(),
+        '/transfer': (context) => TransferPage(userId: 0),
       },
     );
   }

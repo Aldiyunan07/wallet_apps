@@ -28,7 +28,7 @@ class _HistoryPageState extends State<HistoryPage> {
     });
 
     final url = Uri.parse(
-        'https://walletjwtapi.000webhostapp.com/api/transaction/history');
+        'http://10.0.2.2:8000/api/transaction/history');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token'); // Ganti dengan token Bearer Anda
 

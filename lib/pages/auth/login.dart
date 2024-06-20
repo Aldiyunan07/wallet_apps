@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
       String phoneNumber = _phoneNumberController.text.trim();
       String pin = _pinController.text.trim();
 
-      String apiUrl = 'https://walletjwtapi.000webhostapp.com/api/login';
+      String apiUrl = 'http://10.0.2.2:8000/api/login';
 
       try {
         var response = await http.post(
