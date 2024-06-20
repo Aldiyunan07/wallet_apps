@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
       String phoneNumber = _phoneNumberController.text.trim();
       String pin = _pinController.text.trim();
 
-      String apiUrl = 'http://10.0.2.2:8000/api/login';
+      String apiUrl = 'https://walletjwtapi.000webhostapp.com/api/login';
 
       try {
         var response = await http.post(
@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
             context: context,
             builder: (context) => AlertDialog(
               title: Text('Error'),
-              content: Text('Failed to login. Please check your credentials.'),
+              content: Text('Login gagal! Nomor telepon atau pin salah!'),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
           builder: (context) => AlertDialog(
             title: Text('Error'),
             content:
-                Text('An unexpected error occurred. Please try again later.'),
+                Text('Gagal tersambung dengan server'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {

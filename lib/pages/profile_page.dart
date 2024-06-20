@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:percobaan/home.dart';
 import 'package:percobaan/pages/auth/login.dart';
+import 'package:percobaan/pages/history_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -32,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     try {
-      final apiUrl = 'http://10.0.2.2:8000/api/me';
+      final apiUrl = 'https://walletjwtapi.000webhostapp.com/api/me';
 
       final response = await http.get(
         Uri.parse(apiUrl),
@@ -57,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     try {
-      final apiUrl = 'http://10.0.2.2:8000/api/logout';
+      final apiUrl = 'https://walletjwtapi.000webhostapp.com/api/logout';
 
       final response = await http.post(
         Uri.parse(apiUrl),
@@ -72,7 +73,8 @@ class _ProfilePageState extends State<ProfilePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => LoginPage()), // Navigate to after login page
+              builder: (context) =>
+                  LoginPage()), // Navigate to after login page
         );
       } else {
         throw Exception('Failed to logout');
@@ -94,10 +96,12 @@ class _ProfilePageState extends State<ProfilePage> {
             if (snapshot.hasError || snapshot.data == null) {
               return Center(child: Text('Error loading user profile'));
             } else {
-              String nama = snapshot.data!['data']['name'] ?? 'Nama Tidak Diketahui';
+              String nama =
+                  snapshot.data!['data']['name'] ?? 'Nama Tidak Diketahui';
               String phoneNumber = snapshot.data!['data']['phone_number'] ??
                   'Nomor Telepon Tidak Diketahui';
-              String inbalance = snapshot.data!['data']['inbalance']?.toString() ?? '0';
+              String inbalance =
+                  snapshot.data!['data']['inbalance']?.toString() ?? '0';
               String outbalance =
                   snapshot.data!['data']['outbalance']?.toString() ?? '0';
 
@@ -320,12 +324,20 @@ class _ProfilePageState extends State<ProfilePage> {
         );
         break;
       case 1:
-        // Navigasi ke halaman History
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HistoryPage(),
+          ),
+        );
         break;
       case 2:
-        // Navigasi ke halaman Profile
-
-        // Navigasi ke halaman Profile
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfilePage(),
+          ),
+        );
         break;
     }
   }
