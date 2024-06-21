@@ -5,6 +5,7 @@ import 'package:percobaan/pages/history_page.dart';
 import 'package:percobaan/pages/profile_page.dart';
 import 'package:percobaan/pages/topup/chose_topup.dart';
 import 'package:percobaan/pages/transfer/chose_page.dart';
+import 'package:percobaan/pages/withdraw/chose_withdraw.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:percobaan/pages/transfer/transfer_success_page.dart';
 import 'dart:convert';
@@ -269,7 +270,12 @@ class _HomePageState extends State<HomePage> {
                                   size: 24.0,
                                   padding: EdgeInsets.only(left: 12.0)),
                               _buildButton(Icons.money_off, 'Withdraw', () {
-                                // Aksi ketika tombol Withdraw ditekan
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChoseWithdraw(),
+                                  ),
+                                );
                               }, size: 24.0),
                               _buildButton(Icons.swap_horiz, 'Transfer', () {
                                 Navigator.push(
