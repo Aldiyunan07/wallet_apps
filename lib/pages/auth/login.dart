@@ -96,20 +96,44 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF6F7FB),
       body: Center(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              Container(
+                height: 200,
+                child: Image.asset(
+                    'assets_img\images.png'), // Load image from local asset
+              ),
+              SizedBox(height: 24.0),
+              Text(
+                'E-WALLET',
+                style: TextStyle(
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF6A1B9A),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 24.0),
               Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
                     TextFormField(
                       controller: _phoneNumberController,
-                      decoration: InputDecoration(labelText: 'Phone Number'),
+                      decoration: InputDecoration(
+                        labelText: 'Username',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
                       keyboardType: TextInputType.phone,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -124,7 +148,14 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 16.0),
                     TextFormField(
                       controller: _pinController,
-                      decoration: InputDecoration(labelText: 'PIN'),
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
                       obscureText: true,
                       keyboardType: TextInputType.number,
                       validator: (value) {
@@ -140,16 +171,21 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 16.0),
                     SizedBox(
                       height: 50.0,
+                      width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () => _login(context),
                         style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF6A1B9A),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
                         child: Text(
-                          'Login',
-                          style: TextStyle(fontSize: 18.0),
+                          'LOGIN',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -157,19 +193,33 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(height: 16.0),
+              Text(
+                'atau',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 16.0),
               SizedBox(
                 height: 50.0,
+                width: double.infinity,
                 child: TextButton(
                   onPressed: () => _goToRegisterPage(context),
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
+                      side: BorderSide(color: Color(0xFF6A1B9A)),
                     ),
                   ),
                   child: Text(
-                    'Register',
-                    style: TextStyle(fontSize: 18.0),
+                    'REGISTER',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Color(0xFF6A1B9A),
+                    ),
                   ),
                 ),
               ),
