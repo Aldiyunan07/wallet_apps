@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
           // Save token to local storage
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString('token', responseData['token']);
-
+          await prefs.setInt('user_id', responseData['data']['id']);
           // Navigate to after login page
           Navigator.pushReplacement(
             context,
@@ -70,8 +70,7 @@ class _LoginPageState extends State<LoginPage> {
           context: context,
           builder: (context) => AlertDialog(
             title: Text('Error'),
-            content:
-                Text('Gagal tersambung dengan server'),
+            content: Text('Gagal tersambung dengan server'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {

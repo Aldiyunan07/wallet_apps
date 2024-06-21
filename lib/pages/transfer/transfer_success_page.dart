@@ -36,6 +36,7 @@ class _TransferSuccessPageState extends State<TransferSuccessPage> {
       },
     );
     if (response.statusCode == 200) {
+      
       return json.decode(response.body)['data'];
     } else {
       throw Exception('Failed to load transfer data');
@@ -129,6 +130,55 @@ class _TransferSuccessPageState extends State<TransferSuccessPage> {
                                   height: 1,
                                   thickness: 1,
                                   color: Colors.grey[300]),
+                              SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  Icon(Icons.person, size: 24),
+                                  SizedBox(width: 12),
+                                  Text(
+                                    'Detail Pengirim',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Nama',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    transferData['sender']['name'],
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Phone Number',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    transferData['sender']['phone_number'],
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 16),
                               SizedBox(height: 16),
                               Row(
                                 children: [
@@ -233,14 +283,18 @@ class _TransferSuccessPageState extends State<TransferSuccessPage> {
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 10.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
                                     backgroundColor: Color(0xFF623AA2),
                                   ),
                                   child: Text(
                                     'Beranda',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 14,
                                     ),
                                   ),
                                 ),

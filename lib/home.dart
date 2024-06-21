@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:percobaan/pages/history_page.dart';
 import 'package:percobaan/pages/profile_page.dart';
@@ -17,12 +18,21 @@ class _HomePageState extends State<HomePage> {
   late Future<Map<String, dynamic>> _userProfile;
   List<Map<String, dynamic>> transferHistory = [];
   bool isLoading = false;
-
+  int userId = 0;
   @override
   void initState() {
     super.initState();
     _userProfile = _fetchUserProfile();
+    _fetchUserId();
     fetchTransferHistory();
+  }
+
+  Future<void> _fetchUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userId =
+          prefs.getInt('user_id') ?? 0; // Default value 0 jika tidak ada nilai
+    });
   }
 
   Future<void> fetchTransferHistory() async {
@@ -169,14 +179,14 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text(
-                          'Wallet',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
+                        Text('Wallet',
+                            style: GoogleFonts.roboto(
+                              textStyle: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            )),
                         IconButton(
                           icon: Icon(Icons.notifications, color: Colors.white),
                           onPressed: () {
@@ -191,9 +201,11 @@ class _HomePageState extends State<HomePage> {
                       children: <Widget>[
                         Text(
                           'Saldo anda',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.white,
+                          style: GoogleFonts.roboto(
+                            textStyle: TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],
@@ -204,19 +216,23 @@ class _HomePageState extends State<HomePage> {
                       children: <Widget>[
                         Text(
                           'Rp',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white.withOpacity(0.8),
-                          ),
+                          style: GoogleFonts.roboto(
+                            textStyle : TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white.withOpacity(0.8),
+                            ),
+                          ), 
                         ),
                         SizedBox(width: 4.0),
                         Text(
                           '${userProfile['formatted']}',
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                          style: GoogleFonts.roboto(
+                            textStyle : TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],
@@ -274,11 +290,13 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: EdgeInsets.only(left: 8.0),
                       child: Text(
-                        'Histori transfer',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.grey[500],
-                          fontWeight: FontWeight.bold,
+                        'Riwayat transfer',
+                        style: GoogleFonts.roboto(
+                          textStyle : TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.grey[500],
+                            fontWeight: FontWeight.bold,
+                          ), 
                         ),
                       ),
                     ),
@@ -290,6 +308,8 @@ class _HomePageState extends State<HomePage> {
                               itemBuilder: (context, index) {
                                 final transfer = transferHistory[index];
                                 final transferId = transfer['id'];
+                                final isReceiverIdOne =
+                                    transfer['receiver_id'] == userId;
                                 return InkWell(
                                   onTap: () {
                                     Navigator.pushReplacement(
@@ -321,28 +341,41 @@ class _HomePageState extends State<HomePage> {
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 Text(
-                                                  '${transfer['receiver']['name']}',
-                                                  style: TextStyle(
-                                                    fontSize: 16.0,
-                                                    fontWeight: FontWeight.bold,
+                                                  isReceiverIdOne
+                                                      ? '${transfer['sender']['name']}'
+                                                      : '${transfer['receiver']['name']}',
+                                                  style: GoogleFonts.roboto(
+                                                    textStyle : TextStyle(
+                                                      fontSize: 16.0,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ), 
                                                   ),
                                                 ),
                                                 Text(
                                                   '${transfer['date']}',
-                                                  style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    color: Colors.grey,
+                                                  style: GoogleFonts.roboto(
+                                                    textStyle : TextStyle(
+                                                      fontSize: 14.0,
+                                                      color: Colors.grey,
+                                                    ), 
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           ),
                                           Text(
-                                            'Rp. ${transfer['formatted']}',
-                                            style: TextStyle(
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.red,
+                                            isReceiverIdOne
+                                                ? '+Rp.${transfer['formatted']}'
+                                                : '-Rp.${transfer['formatted']}',
+                                            style: GoogleFonts.roboto(
+                                              textStyle : TextStyle(
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: isReceiverIdOne
+                                                    ? Colors.green
+                                                    : Colors.red,
+                                              ), 
                                             ),
                                           ),
                                         ],
@@ -366,18 +399,18 @@ class _HomePageState extends State<HomePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Beranda',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.history),
-            label: 'History',
+            label: 'Riwayat',
           ),
           BottomNavigationBarItem(
             icon: CircleAvatar(
               radius: 15,
               backgroundImage: NetworkImage('https://via.placeholder.com/150'),
             ),
-            label: 'Profile',
+            label: 'Profil',
           ),
         ],
         onTap: _onItemTapped,

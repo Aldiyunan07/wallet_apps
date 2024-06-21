@@ -84,7 +84,6 @@ class VerifikasiPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 16),
@@ -100,14 +99,17 @@ class VerifikasiPage extends StatelessWidget {
                         // Aksi dipindahkan ke dalam PinInput
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(vertical: 10.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
                         backgroundColor: Color(0xFF623AA2),
                       ),
                       child: Text(
                         'Konfirmasi',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                     ),

@@ -81,7 +81,7 @@ class _HistoryPageState extends State<HistoryPage> {
             children: <Widget>[
               SizedBox(height: 24.0),
               Text(
-                'HISTORY TRANSAKSI',
+                'Riwayat Transaksi',
                 style: TextStyle(
                   fontSize: 24.0,
                   color: Colors.white,
@@ -168,11 +168,11 @@ class _HistoryPageState extends State<HistoryPage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Beranda',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.history),
-            label: 'History',
+            label: 'Riwayat',
           ),
           BottomNavigationBarItem(
             icon: CircleAvatar(
@@ -180,7 +180,7 @@ class _HistoryPageState extends State<HistoryPage> {
               backgroundImage: NetworkImage(
                   'https://via.placeholder.com/150'), // Replace with actual image URL
             ),
-            label: 'Profile',
+            label: 'Profil',
           ),
         ],
         onTap: _onItemTapped,

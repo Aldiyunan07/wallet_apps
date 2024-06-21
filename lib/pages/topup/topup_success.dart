@@ -227,13 +227,17 @@ class _TopupSuccessState extends State<TopupSuccess> {
                                       style: ElevatedButton.styleFrom(
                                         padding:
                                             EdgeInsets.symmetric(vertical: 10),
+                                            shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
+                                        ),
                                         backgroundColor: Color(0xFF623AA2),
                                       ),
                                       child: Text(
                                         'Beranda',
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 16,
+                                          fontSize: 14,
                                         ),
                                       ),
                                     ),

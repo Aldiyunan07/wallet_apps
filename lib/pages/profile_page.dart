@@ -70,6 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
       if (response.statusCode == 200) {
         prefs.remove('token');
+        prefs.remove('user_id');
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -149,11 +150,11 @@ class _ProfilePageState extends State<ProfilePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Beranda',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.history),
-            label: 'History',
+            label: 'Riwayat',
           ),
           BottomNavigationBarItem(
             icon: CircleAvatar(
@@ -161,7 +162,7 @@ class _ProfilePageState extends State<ProfilePage> {
               backgroundImage: NetworkImage(
                   'https://via.placeholder.com/150'), // Replace with actual image URL
             ),
-            label: 'Profile',
+            label: 'Profil',
           ),
         ],
         onTap: _onItemTapped,

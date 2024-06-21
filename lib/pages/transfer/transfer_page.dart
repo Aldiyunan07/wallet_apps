@@ -187,7 +187,7 @@ class _TransferPageState extends State<TransferPage> {
                             fillColor: Colors.white.withOpacity(0.8),
                             border: OutlineInputBorder(
                               borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(4),
                             ),
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 14, horizontal: 16),
@@ -206,6 +206,10 @@ class _TransferPageState extends State<TransferPage> {
                               performTransfer(amount);
                             },
                             style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(vertical: 10.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
+                              ),
                               backgroundColor:
                                   Color(0xFF623AA2), // Warna ungu sesuai tema
                             ),
@@ -213,7 +217,7 @@ class _TransferPageState extends State<TransferPage> {
                               'Transfer',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                           ),

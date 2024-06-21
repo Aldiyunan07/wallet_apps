@@ -72,8 +72,9 @@ class PaymentNumber extends StatelessWidget {
                 ),
                 SizedBox(height: 8.0),
                 Card(
+                  
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
+                    borderRadius: BorderRadius.circular(4.0),
                   ),
                   elevation: 5,
                   child: Padding(
@@ -135,13 +136,13 @@ class PaymentNumber extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 8.0),
-                        Text(
-                          "Biaya transaksi sesuai dengan kebijakan bank",
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            color: Colors.grey,
-                          ),
-                        ),
+                        // Text(
+                        //   "Biaya transaksi sesuai dengan kebijakan bank",
+                        //   style: TextStyle(
+                        //     fontSize: 12.0,
+                        //     color: Colors.grey,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -159,17 +160,16 @@ class PaymentNumber extends StatelessWidget {
         child: ElevatedButton(
           onPressed: _submitForm,
           style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 16.0),
+            padding: EdgeInsets.symmetric(vertical: 10.0),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(4.0),
             ),
             backgroundColor: Color(0xFF623AA2),
           ),
           child: Text(
             "KONFIRMASI",
             style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
+              fontSize: 14.0,
               color: Colors.white,
             ),
           ),
