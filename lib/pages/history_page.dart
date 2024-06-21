@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:percobaan/home.dart';
 import 'package:percobaan/pages/profile_page.dart';
 import 'package:percobaan/pages/topup/topup_success.dart';
+import 'package:percobaan/pages/withdraw/witdraw_success.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -103,15 +104,29 @@ class _HistoryPageState extends State<HistoryPage> {
                           Color iconColor = transaction['type'] == 'topup'
                               ? Colors.green
                               : Colors.red;
+
+                          // Format status
+                          String status = transaction['status'];
+                          String formattedStatus =
+                              status[0].toUpperCase() + status.substring(1);
+
                           return InkWell(
                             onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => TopupSuccess(
-                                      transactionId: transactionId),
-                                ),
-                              );
+                              transaction['type'] == 'topup'
+                                  ? Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => TopupSuccess(
+                                            transactionId: transactionId),
+                                      ),
+                                    )
+                                  : Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => WithdrawSuccess(
+                                            transactionId: transactionId),
+                                      ),
+                                    );
                             },
                             child: Card(
                               margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -129,8 +144,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                       child: Padding(
                                         padding: EdgeInsets.only(top: 8.0),
                                         child: Text(
-                                          'Rp '
-                                          '${transaction['formatted']}',
+                                          'Rp ${transaction['formatted']}',
                                           textAlign: TextAlign.right,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
@@ -151,6 +165,24 @@ class _HistoryPageState extends State<HistoryPage> {
                                     Text(
                                       '${transaction['time']}',
                                       style: TextStyle(fontSize: 12.0),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(right: 0.0),
+                                        child: Text(
+                                          formattedStatus,
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            color: status == 'success'
+                                                ? Colors.green
+                                                : status == 'cancel'
+                                                    ? Colors.red
+                                                    : Colors.grey,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
