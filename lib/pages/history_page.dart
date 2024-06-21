@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:percobaan/home.dart';
 import 'package:percobaan/pages/profile_page.dart';
+import 'package:percobaan/pages/topup/topup_success.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -27,8 +28,7 @@ class _HistoryPageState extends State<HistoryPage> {
       isLoading = true;
     });
 
-    final url = Uri.parse(
-        'http://10.0.2.2:8000/api/transaction/history');
+    final url = Uri.parse('http://10.0.2.2:8000/api/transaction/history');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token'); // Ganti dengan token Bearer Anda
 
@@ -96,52 +96,64 @@ class _HistoryPageState extends State<HistoryPage> {
                         itemCount: transactionHistory.length,
                         itemBuilder: (context, index) {
                           final transaction = transactionHistory[index];
+                          final transactionId = transaction['id'];
                           IconData iconData = transaction['type'] == 'topup'
                               ? Icons.arrow_circle_up
                               : Icons.arrow_circle_down;
                           Color iconColor = transaction['type'] == 'topup'
                               ? Colors.green
                               : Colors.red;
-
-                          return Card(
-                            margin: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: ListTile(
-                              leading: Icon(iconData, color: iconColor),
-                              title: Row(
-                                children: [
-                                  Text(
-                                    '${transaction['type'].toUpperCase()}',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(width: 8.0),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: 8.0),
-                                      child: Text('Rp '
-                                        '${transaction['formatted']}',
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16.0,
+                          return InkWell(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TopupSuccess(
+                                      transactionId: transactionId),
+                                ),
+                              );
+                            },
+                            child: Card(
+                              margin: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: ListTile(
+                                leading: Icon(iconData, color: iconColor),
+                                title: Row(
+                                  children: [
+                                    Text(
+                                      '${transaction['type'].toUpperCase()}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(width: 8.0),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(top: 8.0),
+                                        child: Text(
+                                          'Rp '
+                                          '${transaction['formatted']}',
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16.0,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              subtitle: Row(
-                                children: [
-                                  Text(
-                                    '${transaction['date']}',
-                                    style: TextStyle(fontSize: 12.0),
-                                  ),
-                                  SizedBox(width: 8.0),
-                                  Text(
-                                    '${transaction['time']}',
-                                    style: TextStyle(fontSize: 12.0),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                                subtitle: Row(
+                                  children: [
+                                    Text(
+                                      '${transaction['date']}',
+                                      style: TextStyle(fontSize: 12.0),
+                                    ),
+                                    SizedBox(width: 8.0),
+                                    Text(
+                                      '${transaction['time']}',
+                                      style: TextStyle(fontSize: 12.0),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           );

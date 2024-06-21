@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:percobaan/pages/history_page.dart';
 import 'package:percobaan/pages/profile_page.dart';
+import 'package:percobaan/pages/topup/chose_topup.dart';
 import 'package:percobaan/pages/transfer/chose_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:percobaan/pages/transfer/transfer_success_page.dart';
 import 'dart:convert';
 
 class HomePage extends StatefulWidget {
@@ -240,7 +242,14 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              _buildButton(Icons.add, 'Top Up', () {},
+                              _buildButton(Icons.add, 'Top Up', () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChoseTopup(),
+                                  ),
+                                );
+                              },
                                   size: 24.0,
                                   padding: EdgeInsets.only(left: 12.0)),
                               _buildButton(Icons.money_off, 'Withdraw', () {
@@ -280,51 +289,64 @@ class _HomePageState extends State<HomePage> {
                               itemCount: transferHistory.length,
                               itemBuilder: (context, index) {
                                 final transfer = transferHistory[index];
-                                return Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(15.0),
-                                    child: Row(
-                                      children: <Widget>[
-                                        CircleAvatar(
-                                          radius: 20,
-                                          backgroundImage: NetworkImage(
-                                              'https://via.placeholder.com/40'),
-                                        ),
-                                        SizedBox(width: 16.0),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text(
-                                                '${transfer['receiver']['name']}',
-                                                style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                '${transfer['date']}',
-                                                style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  color: Colors.grey,
-                                                ),
-                                              ),
-                                            ],
+                                final transferId = transfer['id'];
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            TransferSuccessPage(
+                                                transferId: transferId),
+                                      ),
+                                    );
+                                  },
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(15.0),
+                                      child: Row(
+                                        children: <Widget>[
+                                          CircleAvatar(
+                                            radius: 20,
+                                            backgroundImage: NetworkImage(
+                                                'https://via.placeholder.com/40'),
                                           ),
-                                        ),
-                                        Text(
-                                          'Rp. ${transfer['formatted']}',
-                                          style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.red,
+                                          SizedBox(width: 16.0),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                  '${transfer['receiver']['name']}',
+                                                  style: TextStyle(
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  '${transfer['date']}',
+                                                  style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          Text(
+                                            'Rp. ${transfer['formatted']}',
+                                            style: TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );

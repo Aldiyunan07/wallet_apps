@@ -61,7 +61,9 @@ class _ChosePageState extends State<ChosePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transfer Uang'),
+        title:
+            Text('Transfer Uang', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF623AA2),
         centerTitle: true,
       ),
       body: Container(
