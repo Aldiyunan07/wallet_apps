@@ -65,7 +65,13 @@ class _ChoseWithdrawState extends State<ChoseWithdraw> {
                       icon: Icons.wallet,
                       label: 'BCA',
                       onPressed: () {
-                        // Action when OVO button is pressed
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                InsertWithdraw(paymentMethod: 'BCA'),
+                          ),
+                        );
                       },
                     ),
                     SizedBox(height: 16.0),
@@ -73,7 +79,13 @@ class _ChoseWithdrawState extends State<ChoseWithdraw> {
                       icon: Icons.wallet,
                       label: 'BNI',
                       onPressed: () {
-                        // Action when GOPAY button is pressed
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                InsertWithdraw(paymentMethod: 'BNI'),
+                          ),
+                        );
                       },
                     ),
                     SizedBox(height: 16.0),
@@ -81,7 +93,13 @@ class _ChoseWithdrawState extends State<ChoseWithdraw> {
                       icon: Icons.credit_card,
                       label: 'ALFAMART',
                       onPressed: () {
-                        // Action when CREDIT CARD button is pressed
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                InsertWithdraw(paymentMethod: 'ALFAMART'),
+                          ),
+                        );
                       },
                       additionalText:
                           'VIA KASIR OUTLET', // Tambahkan teks VIA KASIR OUTLET di sini

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:percobaan/home.dart';
 import 'package:percobaan/pages/auth/login.dart';
@@ -20,8 +21,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  late Future<Map<String, dynamic>?>
-      _userProfile; // Nullable Map for UserProfile
+  late Future<Map<String, dynamic>?> _userProfile;
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
       }
     } catch (e) {
       print('Error fetching user profile: $e');
-      return null; // Return null in case of error
+      return null;
     }
   }
 
@@ -71,17 +71,40 @@ class _ProfilePageState extends State<ProfilePage> {
       if (response.statusCode == 200) {
         prefs.remove('token');
         prefs.remove('user_id');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Logout berhasil!',
+              style: GoogleFonts.roboto(),
+            ),
+            backgroundColor: Colors.green,
+          ),
+        );
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  LoginPage()), // Navigate to after login page
+          MaterialPageRoute(builder: (context) => LoginPage()),
         );
       } else {
-        throw Exception('Failed to logout');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Login gagal!',
+              style: GoogleFonts.roboto(),
+            ),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     } catch (e) {
-      print('Error during logout: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Gagal menyambungkan dengan server',
+            style: GoogleFonts.roboto(),
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
@@ -112,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Color(0xFF623AA2), // Purple color
+                      Color(0xFF623AA2),
                       Colors.white,
                     ],
                     stops: [0.35, 0.35],
@@ -124,20 +147,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(height: 16.0),
-                      // Profile Header
                       _buildProfileHeader(nama, phoneNumber),
                       SizedBox(height: 16.0),
-                      // Balance Cards
-                      _buildBalanceCard(Icons.arrow_downward, Colors.green,
-                          'Uang Masuk', inbalance),
-                      SizedBox(height: 16.0),
-                      _buildBalanceCard(Icons.arrow_upward, Colors.red,
-                          'Uang Keluar', outbalance),
-                      SizedBox(height: 16.0),
-                      // Menu Items
-                      _buildMenuItem(Icons.person, 'Ubah Profil', () {}),
-                      _buildMenuItem(Icons.vpn_key, 'Ubah PIN', () {}),
-                      _buildMenuItem(Icons.logout, 'Logout', _logout),
+                      _buildCombinedBalanceCard(inbalance, outbalance),
+                      Spacer(),
+                      _buildLogoutButton(),
                     ],
                   ),
                 ),
@@ -159,8 +173,7 @@ class _ProfilePageState extends State<ProfilePage> {
           BottomNavigationBarItem(
             icon: CircleAvatar(
               radius: 15,
-              backgroundImage: NetworkImage(
-                  'https://via.placeholder.com/150'), // Replace with actual image URL
+              backgroundImage: NetworkImage('https://via.placeholder.com/150'),
             ),
             label: 'Profil',
           ),
@@ -177,8 +190,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: <Widget>[
           CircleAvatar(
             radius: 40,
-            backgroundImage: NetworkImage(
-                'https://via.placeholder.com/150'), // Replace with actual image URL
+            backgroundImage: NetworkImage('https://via.placeholder.com/150'),
           ),
           SizedBox(width: 16.0),
           Expanded(
@@ -210,8 +222,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildBalanceCard(
-      IconData icon, Color color, String label, String value) {
+  Widget _buildCombinedBalanceCard(String inbalance, String outbalance) {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
@@ -235,39 +246,12 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Column(
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: 20,
-                    backgroundColor: color,
-                    child: Icon(
-                      icon,
-                      color: Colors.white,
-                      size: 16,
-                    ),
-                  ),
-                  SizedBox(height: 4.0),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-              VerticalDivider(color: Colors.grey),
-              Column(
-                children: <Widget>[
-                  Text(
-                    'Rp $value',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+              _buildBalanceDetail(
+                  Icons.arrow_downward, Colors.green, 'Uang Masuk', inbalance),
+              SizedBox(
+                  width: 16.0), // Spacing between Uang Masuk and Uang Keluar
+              _buildBalanceDetail(
+                  Icons.arrow_upward, Colors.red, 'Uang Keluar', outbalance),
             ],
           ),
         ),
@@ -275,15 +259,53 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildMenuItem(IconData icon, String label, VoidCallback onTap) {
+  Widget _buildBalanceDetail(
+      IconData icon, Color color, String label, String value) {
+    return Row(
+      children: <Widget>[
+        CircleAvatar(
+          radius: 20,
+          backgroundColor: color,
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 16,
+          ),
+        ),
+        SizedBox(width: 8.0), // Spacing between icon and text
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.grey,
+              ),
+            ),
+            Text(
+              'Rp $value',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+
+  Widget _buildLogoutButton() {
     return GestureDetector(
-      onTap: onTap,
+      onTap: _logout,
       child: Container(
-        width: double.infinity, // Ensure the container takes full width
+        width: double.infinity,
         padding: EdgeInsets.all(10.0),
         margin: EdgeInsets.symmetric(vertical: 8.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.red,
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(
@@ -295,19 +317,18 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(icon, size: 24.0),
+            Icon(Icons.logout, size: 24.0, color: Colors.white),
             SizedBox(width: 12.0),
-            Expanded(
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
+            Text(
+              'Logout',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
             ),
-            Icon(Icons.arrow_right),
           ],
         ),
       ),
@@ -319,25 +340,19 @@ class _ProfilePageState extends State<ProfilePage> {
       case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => HomePage(),
-          ),
+          MaterialPageRoute(builder: (context) => HomePage()),
         );
         break;
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => HistoryPage(),
-          ),
+          MaterialPageRoute(builder: (context) => HistoryPage()),
         );
         break;
       case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => ProfilePage(),
-          ),
+          MaterialPageRoute(builder: (context) => ProfilePage()),
         );
         break;
     }

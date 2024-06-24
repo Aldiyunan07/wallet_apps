@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -20,7 +21,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future<void> _register() async {
     if (_formKey.currentState!.validate()) {
-      // Collect data from text controllers
       String name = _nameController.text.trim();
       String username = _usernameController.text.trim();
       String email = _emailController.text.trim();
@@ -28,11 +28,9 @@ class _RegisterPageState extends State<RegisterPage> {
       String pin = _pinController.text.trim();
       String pinConfirmation = _pinConfirmationController.text.trim();
 
-      // API endpoint
       String apiUrl = 'http://10.0.2.2:8000/api/register';
 
       try {
-        // Send POST request with registration data
         var response = await http.post(
           Uri.parse(apiUrl),
           body: {
@@ -42,67 +40,39 @@ class _RegisterPageState extends State<RegisterPage> {
             'phone_number': phoneNumber,
             'pin': pin,
             'pin_confirmation':
-                pinConfirmation, // Include pin_confirmation in the request
+                pinConfirmation,
           },
         );
 
-        // Check if request was successful (status code 200)
         if (response.statusCode == 200) {
-          // Parse response JSON
-          var responseData = json.decode(response.body);
-
-          // Show alert with response message
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Registration Successful'),
-              content: Text(responseData['message']),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop(); // Pop register page
-                  },
-                  child: Text('OK'),
-                ),
-              ],
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Registrasi Berhasil berhasil!',
+                style: GoogleFonts.roboto(),
+              ),
+              backgroundColor: Colors.red,
             ),
           );
         } else {
-          // Show alert with error message
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Error'),
-              content: Text('Failed to register. Please try again later.'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('OK'),
-                ),
-              ],
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Registrasi gagal! Lengkapi data terlebih dahulu',
+                style: GoogleFonts.roboto(),
+              ),
+              backgroundColor: Colors.red,
             ),
           );
         }
       } catch (e) {
-        print('Error: $e');
-        // Show alert with error message
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Error'),
-            content:
-                Text('An unexpected error occurred. Please try again later.'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('OK'),
-              ),
-            ],
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Gagal menyambungkan dengan server',
+              style: GoogleFonts.roboto(),
+            ),
+            backgroundColor: Colors.red,
           ),
         );
       }

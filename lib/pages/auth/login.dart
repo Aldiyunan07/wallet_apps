@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:percobaan/home.dart';
 import 'package:percobaan/pages/auth/register.dart';
@@ -34,51 +35,42 @@ class _LoginPageState extends State<LoginPage> {
         if (response.statusCode == 200) {
           var responseData = json.decode(response.body);
 
-          // Save token to local storage
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString('token', responseData['token']);
           await prefs.setInt('user_id', responseData['data']['id']);
-          // Navigate to after login page
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    HomePage()), // Navigate to after login page
-          );
-        } else {
-          // Show alert with error message
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Error'),
-              content: Text('Login gagal! Nomor telepon atau pin salah!'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('OK'),
-                ),
-              ],
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Login berhasil!', style: GoogleFonts.roboto(),),
+              backgroundColor: Colors.green,
             ),
           );
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+
+        } else {
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Phone number atau pin salah!',
+                style: GoogleFonts.roboto(),
+              ),
+              backgroundColor: Colors.red,
+            ),
+          );
+
         }
       } catch (e) {
-        print('Error: $e');
-        // Show alert with error message
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Error'),
-            content: Text('Gagal tersambung dengan server'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('OK'),
-              ),
-            ],
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Gagal menyambungkan dengan server',
+              style: GoogleFonts.roboto(),
+            ),
+            backgroundColor: Colors.red,
           ),
         );
       }
@@ -88,8 +80,7 @@ class _LoginPageState extends State<LoginPage> {
   void _goToRegisterPage(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => RegisterPage()), // Navigate to register page
+      MaterialPageRoute(builder: (context) => RegisterPage()),
     );
   }
 
@@ -107,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 height: 200,
                 child: Image.asset(
-                    'assets_img\images.png'), // Load image from local asset
+                    'assets_img/images.png'), // Load image from local asset
               ),
               SizedBox(height: 24.0),
               Text(
@@ -127,29 +118,21 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                       controller: _phoneNumberController,
                       decoration: InputDecoration(
-                        labelText: 'Username',
+                        labelText: 'Phone Number',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         filled: true,
                         fillColor: Colors.white,
                       ),
-                      keyboardType: TextInputType.phone,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your phone number';
-                        }
-                        if (!RegExp(r'^\d{10,15}$').hasMatch(value)) {
-                          return 'Please enter a valid phone number';
-                        }
-                        return null;
-                      },
+                      keyboardType: TextInputType.number,
+                      // Hapus inputFormatters
                     ),
                     SizedBox(height: 16.0),
                     TextFormField(
                       controller: _pinController,
                       decoration: InputDecoration(
-                        labelText: 'Password',
+                        labelText: 'Pin',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -158,15 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       obscureText: true,
                       keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your PIN';
-                        }
-                        if (value.length != 6) {
-                          return 'PIN must be 6 digits long';
-                        }
-                        return null;
-                      },
+                      // Hapus inputFormatters
                     ),
                     SizedBox(height: 16.0),
                     SizedBox(

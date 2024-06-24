@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'payment_number.dart';
+import 'package:google_fonts/google_fonts.dart'; // Import untuk menggunakan Google Fonts
 
 class ChoseTopup extends StatefulWidget {
   const ChoseTopup({super.key});
@@ -131,8 +132,16 @@ class _ChoseTopupState extends State<ChoseTopup> {
             children: [
               Icon(icon, size: 24.0, color: Colors.black),
               SizedBox(width: 16.0),
-              Text(label,
-                  style: TextStyle(fontSize: 16.0, color: Colors.black)),
+              Text(
+                label,
+                style: GoogleFonts.roboto(
+                  // Gunakan GoogleFonts di sini
+                  textStyle: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
             ],
           ),
           Icon(Icons.arrow_forward_ios, size: 16.0, color: Color(0xFF623AA2)),

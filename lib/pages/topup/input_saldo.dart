@@ -1,9 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:percobaan/pages/topup/topup_success.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart'; // Import untuk menggunakan Google Fonts
 
 class InputSaldo extends StatefulWidget {
   final String paymentMethod;
@@ -99,7 +99,10 @@ class _InputSaldoState extends State<InputSaldo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Input Saldo', style: TextStyle(color: Colors.white)),
+        title: Text(
+          'Input Saldo',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Color(0xFF623AA2),
         centerTitle: true,
       ),
@@ -155,18 +158,24 @@ class _InputSaldoState extends State<InputSaldo> {
                               children: [
                                 Text(
                                   widget.paymentMethod,
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
+                                  style: GoogleFonts.roboto(
+                                    // Gunakan GoogleFonts di sini
+                                    textStyle: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(height: 4.0),
                                 Text(
                                   widget.paymentNumber,
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: Colors.grey[600],
+                                  style: GoogleFonts.roboto(
+                                    // Gunakan GoogleFonts di sini
+                                    textStyle: TextStyle(
+                                      fontSize: 14.0,
+                                      color: Colors.grey[600],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -237,9 +246,12 @@ class _InputSaldoState extends State<InputSaldo> {
           ),
           child: Text(
             "KONFIRMASI",
-            style: TextStyle(
-              fontSize: 14.0,
-              color: Colors.white,
+            style: GoogleFonts.roboto(
+              // Gunakan GoogleFonts di sini
+              textStyle: TextStyle(
+                fontSize: 14.0,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
