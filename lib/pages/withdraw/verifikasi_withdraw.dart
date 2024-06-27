@@ -12,7 +12,7 @@ class VerifikasiWithdraw extends StatelessWidget {
   void _confirmTransfer(String pin, BuildContext context) async {
     try {
       String apiUrl =
-          'http://10.0.2.2:8000/api/transaction/confirmation/$transactionId';
+          'https://walletjwtapi.000webhostapp.com/api/transaction/confirmation/$transactionId';
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('token');

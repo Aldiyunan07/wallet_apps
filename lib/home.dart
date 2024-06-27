@@ -41,7 +41,8 @@ class _HomePageState extends State<HomePage> {
       isLoading = true;
     });
 
-    final url = Uri.parse('http://10.0.2.2:8000/api/transfer/history');
+    final url = Uri.parse(
+        'https://walletjwtapi.000webhostapp.com/api/transfer/history');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     try {
@@ -81,7 +82,7 @@ class _HomePageState extends State<HomePage> {
       throw Exception('Token is null');
     }
 
-    String apiUrl = 'http://10.0.2.2:8000/api/me';
+    String apiUrl = 'https://walletjwtapi.000webhostapp.com/api/me';
 
     final response = await http.get(
       Uri.parse(apiUrl),

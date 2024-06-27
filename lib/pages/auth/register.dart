@@ -28,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
       String pin = _pinController.text.trim();
       String pinConfirmation = _pinConfirmationController.text.trim();
 
-      String apiUrl = 'http://10.0.2.2:8000/api/register';
+      String apiUrl = 'https://walletjwtapi.000webhostapp.com/api/register';
 
       try {
         var response = await http.post(
@@ -48,10 +48,10 @@ class _RegisterPageState extends State<RegisterPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                'Registrasi Berhasil berhasil!',
+                'Registrasi Berhasil!',
                 style: GoogleFonts.roboto(),
               ),
-              backgroundColor: Colors.red,
+              backgroundColor: Colors.green,
             ),
           );
         } else {

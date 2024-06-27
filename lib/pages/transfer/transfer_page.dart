@@ -30,7 +30,8 @@ class _TransferPageState extends State<TransferPage> {
     String? token = prefs.getString('token');
 
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:8000/api/user/${widget.userId}'),
+      Uri.parse(
+          'https://walletjwtapi.000webhostapp.com/api/user/${widget.userId}'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -56,7 +57,7 @@ class _TransferPageState extends State<TransferPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
 
-    final String apiUrl = 'http://10.0.2.2:8000/api/transfer';
+    final String apiUrl = 'https://walletjwtapi.000webhostapp.com/api/transfer';
 
     final Map<String, dynamic> requestData = {
       "user_id": widget.userId.toString(),

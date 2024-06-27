@@ -12,7 +12,7 @@ class VerifikasiPage extends StatelessWidget {
   void _confirmTransfer(String pin, BuildContext context) async {
     try {
       String apiUrl =
-          'http://10.0.2.2:8000/api/transfer/confirmation/$transferId';
+          'https://walletjwtapi.000webhostapp.com/api/transfer/confirmation/$transferId';
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('token');

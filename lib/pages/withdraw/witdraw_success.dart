@@ -28,7 +28,8 @@ class _WithdrawSuccessState extends State<WithdrawSuccess> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:8000/api/transaction/${widget.transactionId}'),
+      Uri.parse(
+          'https://walletjwtapi.000webhostapp.com/api/transaction/${widget.transactionId}'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',

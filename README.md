@@ -1,16 +1,77 @@
-# percobaan
+# E-Wallet Application
 
-A new Flutter project.
+## Deskripsi
+Aplikasi e-wallet ini memungkinkan pengguna untuk melakukan top-up, withdraw, dan transfer. Aplikasi ini menggunakan API dari [walletjwtapi.000webhostapp.com](http://walletjwtapi.000webhostapp.com) untuk menangani operasi keuangan.
 
-## Getting Started
+## Fitur
+- **Top-up**: Pengguna dapat mengisi saldo e-wallet mereka.
+- **Withdraw**: Pengguna dapat menarik saldo dari e-wallet mereka ke rekening bank.
+- **Transfer**: Pengguna dapat mentransfer saldo ke pengguna e-wallet lain.
 
-This project is a starting point for a Flutter application.
+## Prasyarat
+- Flutter SDK
+- Android Studio atau Visual Studio Code dengan ekstensi Flutter
+- PHP dan Composer (untuk API Laravel)
 
-A few resources to get you started if this is your first Flutter project:
+## Instalasi
+### Aplikasi Flutter
+1. Clone repository ini
+    ```bash
+    git clone https://github.com/username/ewallet-app.git
+    ```
+2. Pindah ke direktori proyek
+    ```bash
+    cd ewallet-app
+    ```
+3. Instal dependensi
+    ```bash
+    flutter pub get
+    ```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### API Laravel
+1. Clone repository API
+    ```bash
+    git clone https://github.com/Aldiyunan07/wallet_api.git
+    ```
+2. Pindah ke direktori proyek API
+    ```bash
+    cd wallet_api
+    ```
+3. Instal dependensi
+    ```bash
+    composer install
+    ```
+4. Salin file `.env.example` menjadi `.env`
+    ```bash
+    cp .env.example .env
+    ```
+5. Generate key aplikasi Laravel
+    ```bash
+    php artisan key:generate
+    ```
+6. Konfigurasi database di file `.env`
+7. Migrasi database
+    ```bash
+    php artisan migrate
+    ```
+8. Jalankan server API lokal
+    ```bash
+    php artisan serve
+    ```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Penggunaan
+1. Jalankan aplikasi Flutter
+    ```bash
+    flutter run
+    ```
+
+2. Akses aplikasi di emulator atau perangkat fisik.
+
+## Catatan
+Jika terdapat kesalahan dalam menyambungkan ke server API di [walletjwtapi.000webhostapp.com](http://walletjwtapi.000webhostapp.com), maka Anda dapat menggunakan API lokal yang tersedia di GitHub dengan langkah-langkah yang dijelaskan di atas.
+
+## Kontribusi
+Silakan membuat pull request jika ingin berkontribusi pada proyek ini.
+
+## Lisensi
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).

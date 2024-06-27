@@ -25,7 +25,7 @@ class _ChosePageState extends State<ChosePage> {
   Future<void> fetchUsers() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
-    final url = 'http://10.0.2.2:8000/api/users';
+    final url = 'https://walletjwtapi.000webhostapp.com/api/users';
     final response = await http.get(
       Uri.parse(url),
       headers: {

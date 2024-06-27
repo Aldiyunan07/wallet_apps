@@ -35,7 +35,8 @@ class _InputSaldoState extends State<InputSaldo> {
     }
 
     // URL API
-    final apiUrl = Uri.parse('http://10.0.2.2:8000/api/transaction');
+    final apiUrl =
+        Uri.parse('https://walletjwtapi.000webhostapp.com/api/transaction');
 
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();

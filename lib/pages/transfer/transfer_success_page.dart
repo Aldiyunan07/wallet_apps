@@ -29,7 +29,8 @@ class _TransferSuccessPageState extends State<TransferSuccessPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:8000/api/transfer/${widget.transferId}'),
+      Uri.parse(
+          'https://walletjwtapi.000webhostapp.com/api/transfer/${widget.transferId}'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',

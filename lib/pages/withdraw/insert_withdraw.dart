@@ -32,7 +32,7 @@ class _InsertWithdrawState extends State<InsertWithdraw> {
       throw Exception('Token is null');
     }
 
-    String apiUrl = 'http://10.0.2.2:8000/api/me';
+    String apiUrl = 'https://walletjwtapi.000webhostapp.com/api/me';
 
     final response = await http.get(
       Uri.parse(apiUrl),
@@ -57,7 +57,8 @@ class _InsertWithdrawState extends State<InsertWithdraw> {
       throw Exception('Token is null');
     }
 
-    String apiUrl = 'http://10.0.2.2:8000/api/transaction/withdraw';
+    String apiUrl =
+        'https://walletjwtapi.000webhostapp.com/api/transaction/withdraw';
 
     final response = await http.post(
       Uri.parse(apiUrl),
