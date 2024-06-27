@@ -33,7 +33,6 @@ Aplikasi e-wallet ini memungkinkan pengguna untuk melakukan top-up, withdraw, da
     flutter pub get
     ```
 ## Paket yang Diinstal
-```yaml
 dependencies:
   flutter:
     sdk: flutter
