@@ -32,16 +32,13 @@ Aplikasi e-wallet ini memungkinkan pengguna untuk melakukan top-up, withdraw, da
     ```bash
     flutter pub get
     ```
-## Paket yang Diinstal
-dependencies:
-  flutter:
-    sdk: flutter
-  cupertino_icons: ^1.0.6
-  http: ^1.2.1
-  shared_preferences: ^2.2.3
-  intl: ^0.17.0
-  google_fonts: ^6.2.1
 
+## Package yang Diinstal
+- **Cupertino Icons ^1.0.6**: Ikon untuk aplikasi iOS.
+- **Http ^1.2.1**: Melakukan request HTTP.
+- **Shared Preferences ^2.2.3**: Menyimpan data sederhana secara lokal.
+- **Intl ^0.17.0**: Internasionalisasi dan format tanggal/angka.
+- **Google Fonts ^6.2.1**: Menggunakan font dari Google Fonts.
 
 ### API Laravel
 1. Clone repository API
@@ -84,3 +81,9 @@ dependencies:
 
 ## Catatan
 Jika terdapat kesalahan dalam menyambungkan ke server API di [walletjwtapi.000webhostapp.com](http://walletjwtapi.000webhostapp.com), maka Anda dapat menggunakan API lokal yang tersedia di GitHub dengan langkah-langkah yang dijelaskan di atas.
+
+## Kontribusi
+Silakan membuat pull request jika ingin berkontribusi pada proyek ini.
+
+## Lisensi
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
