@@ -7,6 +7,8 @@ Aplikasi e-wallet ini memungkinkan pengguna untuk melakukan top-up, withdraw, da
 - **Top-up**: Pengguna dapat mengisi saldo e-wallet mereka.
 - **Withdraw**: Pengguna dapat menarik saldo dari e-wallet mereka ke rekening bank.
 - **Transfer**: Pengguna dapat mentransfer saldo ke pengguna e-wallet lain.
+- **Login**: Pengguna dapat masuk ke akun sendiri.
+- **Riwayat Transaksi**: Pengguna dapat melihat riwayat transaksi, dan riwayat transfer.
 
 ## Kelompok 5
 - **Aldi Yunan Anwari**
