@@ -15,6 +15,13 @@ Aplikasi e-wallet ini memungkinkan pengguna untuk melakukan top-up, withdraw, da
 - **Gumilar Ichsanulhaq**
 - **Paschal Hendryawan**
 
+## Package yang Diinstal
+- **Cupertino Icons ^1.0.6** : Ikon untuk aplikasi iOS.
+- **Http ^1.2.1** : Melakukan request HTTP.
+- **Shared Preferences ^2.2.3** : Menyimpan data sederhana secara lokal.
+- **Intl ^0.17.0** : Internasionalisasi dan format tanggal/angka.
+- **Google Fonts ^6.2.1** : Menggunakan font dari Google Fonts.
+
 ## Prasyarat
 - Flutter SDK
 - Android Studio atau Visual Studio Code dengan ekstensi Flutter
@@ -35,12 +42,6 @@ Aplikasi e-wallet ini memungkinkan pengguna untuk melakukan top-up, withdraw, da
     flutter pub get
     ```
 
-## Package yang Diinstal
-- **Cupertino Icons ^1.0.6** : Ikon untuk aplikasi iOS.
-- **Http ^1.2.1** : Melakukan request HTTP.
-- **Shared Preferences ^2.2.3** : Menyimpan data sederhana secara lokal.
-- **Intl ^0.17.0** : Internasionalisasi dan format tanggal/angka.
-- **Google Fonts ^6.2.1** : Menggunakan font dari Google Fonts.
 
 ## Catatan
 Jika terdapat kesalahan dalam menyambungkan ke server API di [walletjwtapi.000webhostapp.com](http://walletjwtapi.000webhostapp.com), maka Anda dapat menggunakan API lokal yang tersedia di GitHub dengan langkah-langkah yang dijelaskan di bawah ini.
