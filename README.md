@@ -34,11 +34,11 @@ Aplikasi e-wallet ini memungkinkan pengguna untuk melakukan top-up, withdraw, da
     ```
 
 ## Package yang Diinstal
-- **Cupertino Icons ^1.0.6**: Ikon untuk aplikasi iOS.
-- **Http ^1.2.1**: Melakukan request HTTP.
-- **Shared Preferences ^2.2.3**: Menyimpan data sederhana secara lokal.
-- **Intl ^0.17.0**: Internasionalisasi dan format tanggal/angka.
-- **Google Fonts ^6.2.1**: Menggunakan font dari Google Fonts.
+- **Cupertino Icons ^1.0.6** : Ikon untuk aplikasi iOS.
+- **Http ^1.2.1** : Melakukan request HTTP.
+- **Shared Preferences ^2.2.3** : Menyimpan data sederhana secara lokal.
+- **Intl ^0.17.0** : Internasionalisasi dan format tanggal/angka.
+- **Google Fonts ^6.2.1** : Menggunakan font dari Google Fonts.
 
 ### API Laravel
 1. Clone repository API
