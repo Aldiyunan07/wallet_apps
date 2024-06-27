@@ -31,11 +31,11 @@ Aplikasi e-wallet ini memungkinkan pengguna untuk melakukan top-up, withdraw, da
 ### Aplikasi Flutter
 1. Clone repository ini
     ```bash
-    git clone https://github.com/username/ewallet-app.git
+    git clone https://github.com/Aldiyunan07/wallet_apps.git
     ```
 2. Pindah ke direktori proyek
     ```bash
-    cd ewallet-app
+    cd wallet_apps
     ```
 3. Instal dependensi
     ```bash
