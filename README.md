@@ -40,6 +40,10 @@ Aplikasi e-wallet ini memungkinkan pengguna untuk melakukan top-up, withdraw, da
 - **Intl ^0.17.0** : Internasionalisasi dan format tanggal/angka.
 - **Google Fonts ^6.2.1** : Menggunakan font dari Google Fonts.
 
+## Catatan
+Jika terdapat kesalahan dalam menyambungkan ke server API di [walletjwtapi.000webhostapp.com](http://walletjwtapi.000webhostapp.com), maka Anda dapat menggunakan API lokal yang tersedia di GitHub dengan langkah-langkah yang dijelaskan di bawah ini.
+
+
 ### API Laravel
 1. Clone repository API
     ```bash
@@ -78,12 +82,3 @@ Aplikasi e-wallet ini memungkinkan pengguna untuk melakukan top-up, withdraw, da
     ```
 
 2. Akses aplikasi di emulator atau perangkat fisik.
-
-## Catatan
-Jika terdapat kesalahan dalam menyambungkan ke server API di [walletjwtapi.000webhostapp.com](http://walletjwtapi.000webhostapp.com), maka Anda dapat menggunakan API lokal yang tersedia di GitHub dengan langkah-langkah yang dijelaskan di atas.
-
-## Kontribusi
-Silakan membuat pull request jika ingin berkontribusi pada proyek ini.
-
-## Lisensi
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
